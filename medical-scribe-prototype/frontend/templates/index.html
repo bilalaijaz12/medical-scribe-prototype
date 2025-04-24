@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Medical Scribe Prototype</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI Medical Scribe</h1>
+      <p>Prototype for automated medical documentation</p>
+    </header>
+
+    <main>
+      <div class="recording-section">
+        <h2>Record Patient Encounter</h2>
+        <div class="controls">
+          <button id="startRecording" class="btn primary">Start Recording</button>
+          <button id="stopRecording" class="btn secondary" disabled>Stop Recording</button>
+          <div class="status" id="recordingStatus">Not recording</div>
+        </div>
+      </div>
+
+      <div class="transcription-section">
+        <h2>Transcription</h2>
+        <div class="transcription-box" id="transcriptionText">
+          <p class="placeholder">Transcription will appear here...</p>
+        </div>
+      </div>
+
+      <div class="notes-section">
+        <h2>Medical Notes</h2>
+        <div class="notes-container">
+          <div class="soap-section">
+            <h3>Subjective</h3>
+            <div id="subjective" class="soap-content"></div>
+          </div>
+          <div class="soap-section">
+            <h3>Objective</h3>
+            <div id="objective" class="soap-content"></div>
+          </div>
+          <div class="soap-section">
+            <h3>Assessment</h3>
+            <div id="assessment" class="soap-content"></div>
+          </div>
+          <div class="soap-section">
+            <h3>Plan</h3>
+            <div id="plan" class="soap-content"></div>
+          </div>
+        </div>
+        <button id="generateNotes" class="btn primary" disabled>Generate Notes</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

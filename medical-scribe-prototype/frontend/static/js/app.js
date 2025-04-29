@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
         startBtn.disabled = false;
       }
     }
+
+    
     
     // Display transcription
     function displayTranscription(text) {
@@ -133,6 +135,34 @@ document.addEventListener('DOMContentLoaded', function() {
       assessmentEl.textContent = notes.sections.assessment || 'No assessment provided';
       planEl.textContent = notes.sections.plan || 'No plan provided';
     }
+
+    // Add this to your frontend/static/js/app.js
+    // function setupSpeechRecognition() {
+    //   if ('webkitSpeechRecognition' in window) {
+    //     const recognition = new webkitSpeechRecognition();
+    //     recognition.continuous = true;
+    //     recognition.interimResults = true;
+        
+    //     recognition.onresult = function(event) {
+    //       let finalTranscript = '';
+    //       for (let i = event.resultIndex; i < event.results.length; ++i) {
+    //         if (event.results[i].isFinal) {
+    //           finalTranscript += event.results[i][0].transcript;
+    //         }
+    //       }
+          
+    //       if (finalTranscript) {
+    //         document.getElementById('transcriptionText').innerHTML = 
+    //           `<p>${finalTranscript}</p>`;
+    //         // Enable the generate notes button
+    //         document.getElementById('generateNotes').disabled = false;
+    //       }
+    //     };
+        
+    //     return recognition;
+    //   }
+    //   return null;
+    // }
     
     // Initialize
     initializeRecorder();

@@ -1,0 +1,57 @@
+# Byte‑compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Flask instance folder
+instance/
+
+# dotenv
+.env
+.env.*
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Audio/temp files
+*.mp3
+*.webm
+temp_*.*
+tmp.*
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# MacOS
+.DS_Store
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Pytest cache
+.pytest_cache/

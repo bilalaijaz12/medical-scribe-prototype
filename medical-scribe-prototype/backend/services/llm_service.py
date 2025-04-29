@@ -6,7 +6,7 @@ def generate_formatted_notes(transcription):
     """Generate formatted medical notes using OpenRouter"""
     try:
         api_key = os.environ.get('OPENROUTER_API_KEY')
-        model = os.environ.get('LLM_MODEL', 'anthropic/claude-3-opus-20240229')
+        model = 'mistralai/mistral-medium'
         
         payload = {
             "model": model,

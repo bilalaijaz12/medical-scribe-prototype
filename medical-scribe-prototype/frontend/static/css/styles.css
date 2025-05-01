@@ -147,6 +147,16 @@
     min-height: 100px;
     white-space: pre-wrap;
   }
+
+  .doctor {
+    color: #4285f4;
+    font-weight: bold;
+  }
+
+  .patient {
+    color: #34a853;
+    font-weight: bold;
+  }
   
   @media (max-width: 768px) {
     .notes-container {

@@ -49,3 +49,56 @@ def transcribe_audio(audio_path):
         # Clean up temp files
         if 'temp_mp3' in locals() and os.path.exists(temp_mp3):
             os.remove(temp_mp3)
+
+# Add to backend/services/speech_service.py
+
+def add_speaker_labels(transcription):
+    """Add speaker labels to transcription using a lightweight LLM"""
+    try:
+        api_key = os.environ.get('OPENROUTER_API_KEY')
+        model = "qwen/qwen3-4b:free"  # Smaller, faster model for this task
+        
+        print(f"Adding speaker labels using {model}...")
+        
+        payload = {
+            "model": model,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": """You are a medical transcription specialist. 
+                    Your task is to add 'Doctor:' and 'Patient:' labels to the beginning of each statement in a medical conversation.
+                    Use contextual clues to determine who is speaking.
+                    - Doctors typically introduce themselves as doctors, discuss treatments, give medical advice, and ask about symptoms
+                    - Patients typically describe symptoms, answer questions, and respond to recommendations
+                    Format the conversation with a new line for each speaker change."""
+                },
+                {
+                    "role": "user",
+                    "content": f"Add 'Doctor:' and 'Patient:' labels to this medical conversation transcript: {transcription}"
+                }
+            ],
+            "temperature": 0.1,
+            "max_tokens": 1000
+        }
+        
+        headers = {
+            'Authorization': f"Bearer {api_key}",
+            'Content-Type': 'application/json'
+        }
+        
+        response = requests.post(
+            'https://openrouter.ai/api/v1/chat/completions',
+            json=payload,
+            headers=headers
+        )
+        
+        if response.status_code != 200:
+            print(f"Speaker labeling API error: {response.status_code} - {response.text}")
+            return transcription
+            
+        labeled_text = response.json()['choices'][0]['message']['content']
+        return labeled_text
+        
+    except Exception as e:
+        print(f"Speaker labeling error: {str(e)}")
+        return transcription  # Return original transcription if there's an error

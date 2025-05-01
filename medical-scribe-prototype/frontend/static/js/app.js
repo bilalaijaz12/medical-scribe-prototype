@@ -136,6 +136,17 @@ document.addEventListener('DOMContentLoaded', function() {
       planEl.textContent = notes.sections.plan || 'No plan provided';
     }
 
+    function displayTranscription(text) {
+      const formattedHTML = text
+        .replace(/Doctor:/g, '<span class="doctor-text">Doctor:</span>')
+        .replace(/Patient:/g, '<span class="patient-text">Patient:</span>')
+        .replace(/\n/g, '<br>');
+
+      transcriptionEl.innerHTML = formattedHTML;
+
+    }
+
+
     // Add this to your frontend/static/js/app.js
     // function setupSpeechRecognition() {
     //   if ('webkitSpeechRecognition' in window) {

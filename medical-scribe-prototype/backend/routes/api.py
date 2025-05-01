@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 import os
 import tempfile
-from backend.services.speech_service import transcribe_audio
+from backend.services.speech_service import transcribe_audio, add_speaker_labels
 from backend.services.llm_service import generate_formatted_notes
 
 api_bp = Blueprint('api', __name__)
@@ -21,12 +21,15 @@ def process_transcription():
         audio_file.save(temp_path)
         
         # Transcribe audio
-        transcription = transcribe_audio(temp_path)
+        raw_transcription = transcribe_audio(temp_path)
+
+        labeled_transcription = add_speaker_labels(raw_transcription)
+
         
         # Clean up temporary file
         os.remove(temp_path)
         
-        return jsonify({'transcription': transcription})
+        return jsonify({'transcription': labeled_transcription})
     
     except Exception as e:
         print(f"Transcription error: {str(e)}")
